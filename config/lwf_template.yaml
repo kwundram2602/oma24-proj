@@ -1,7 +1,7 @@
 user: di54xen                       
 # Path to the virtual environment to activate on the HPC node.
 # Default: /dss/dsstbyfs02/pn49ci/pn49ci-dss-0026/<user>/.venv
-venv_path: null                     
+venv_path: /dss/dsshome1/02/di54xen/projects/oma24-proj/.venv                     
 # Data
 # ---------------------------------------------------------------------------
 csv_name: dev_1000_file.csv         # CSV file with NPZ paths

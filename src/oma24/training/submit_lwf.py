@@ -7,10 +7,10 @@ from pathlib import Path
 import submitit
 import yaml
 
-from training.lwf_unet_aspp_trainer import LWFUNetASPPTrainer
-from training.lwf_unet_loss_trainer import LWFUNetLossTrainer
-from training.lwf_unet_skeleton_trainer import LWFUNetSkeletonTrainer
-from training.lwf_unet_trainer import LWFUNetTrainer
+from oma24.training.lwf_unet_aspp_trainer import LWFUNetASPPTrainer
+from oma24.training.lwf_unet_loss_trainer import LWFUNetLossTrainer
+from oma24.training.lwf_unet_skeleton_trainer import LWFUNetSkeletonTrainer
+from oma24.training.lwf_unet_trainer import LWFUNetTrainer
 
 logger = logging.getLogger(__name__)
 
@@ -147,7 +147,7 @@ def main():  # noqa: D103
         description="Submit LWF-DLR U-Net segmentation training to SLURM cluster"
     )
     parser.add_argument(
-        "config",
+        "--config",
         type=Path,
         help="Path to the YAML configuration file",
     )
