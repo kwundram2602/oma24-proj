@@ -17,7 +17,7 @@ dependencies = [
     "rasterio>=1.5.0",
     "scikit-image>=0.26.0",
     "scipy>=1.17.1",
-    "submitit>=1.5.4",
+
     "tensorboard>=2.20.0",
     "torch>=2.10.0",
     "torchgeo>=0.9.0",
@@ -53,7 +53,7 @@ url = "https://download.pytorch.org/whl/cu126"
 explicit = true
 
 [project.scripts]
-submit_lwf = "oma24.training.submit_lwf:main"
+train_lwf = "oma24.training.train_lwf:main"
 
 [build-system]
 requires = ["hatchling"]
