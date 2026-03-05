@@ -4,4 +4,50 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+authors = [
+    { name = "Kjell Wundram", email = "kjelldre.wundram@gmail.com" }
+]
+dependencies = [
+    "geopandas>=1.1.2",
+    "importlib-metadata>=8.7.1",
+    "matplotlib>=3.10.8",
+    "pandas>=3.0.1",
+    "pyarrow>=23.0.1",
+    "pyyaml>=6.0",
+    "rasterio>=1.5.0",
+    "scikit-image>=0.26.0",
+    "scipy>=1.17.1",
+    "submitit>=1.5.4",
+    "tensorboard>=2.20.0",
+    "torch>=2.10.0",
+    "torchgeo>=0.9.0",
+    "torchinfo>=1.8.0",
+    "torchvision>=0.25.0",
+]
+
+classifiers = [
+    "Private :: Do Not Upload",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13"
+]
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu", marker = "sys_platform == 'win32'" },
+  { index = "pytorch-cu126", marker = "sys_platform == 'linux'" },
+]
+torchvision = [
+  { index = "pytorch-cpu", marker = "sys_platform == 'win32'" },
+  { index = "pytorch-cu126", marker = "sys_platform == 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
