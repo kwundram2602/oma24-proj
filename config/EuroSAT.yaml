@@ -1,0 +1,12 @@
+user: di54xen
+epochs: 20
+batch_size: 128
+num_workers: 10
+prefetch_factor: 8
+experiment_id: ResNet50_exp_002
+partition: hpda2_compute_gpu
+time: "03:00:00"
+gpus_per_node: 1
+mem_gb: 256
+account: pn39sa-c
+clusters: hpda2
