@@ -47,8 +47,6 @@ def submit_lwf_training(cfg: dict) -> submitit.Job:
     slurm_additional_parameters = {
         "clusters": clusters,
         "account": account,
-        "get-user-env": True,
-        "export": "NONE",
     }
 
     if mail_user:
