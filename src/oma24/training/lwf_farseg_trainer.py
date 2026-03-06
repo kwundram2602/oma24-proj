@@ -12,6 +12,7 @@ from torchgeo.models import FarSeg
 
 logger = logging.getLogger(__name__)
 
+
 class SegmentationDataset(Dataset):
     """Dataset for loading NPZ files with segmentation data."""
 
@@ -67,12 +68,15 @@ class SegmentationDataset(Dataset):
 
         # Convert to torch tensors
         # Repeat to 3 channels to match ResNet backbone expected input
-        x = torch.from_numpy(binary_mask).unsqueeze(0).repeat(3, 1, 1)  # Shape: (3, H, W)
+        x = (
+            torch.from_numpy(binary_mask).unsqueeze(0).repeat(3, 1, 1)
+        )  # Shape: (3, H, W)
         y = torch.from_numpy(remapped_mask).long()  # Shape: (H, W)
 
         return x, y
-    
-class LWF_FarSeg_Trainer():
+
+
+class LWF_FarSeg_Trainer:
     def __init__(
         self,
         user: str,
@@ -92,7 +96,7 @@ class LWF_FarSeg_Trainer():
         warmup_steps: int = 100,
         save_every_n_steps: int = 20,
         experiment_group: str = "LWF-DLR",
-        experiment_id: str = "baseline_unet_slurm",
+        experiment_id: str = "farseg_baseline",
     ):
         """
         Initialize the LWF U-Net trainer.
@@ -350,7 +354,9 @@ class LWF_FarSeg_Trainer():
 
                 # Log learning rate every step
                 self.writer.add_scalar(
-                    "Train/learning_rate", self.optimizer.param_groups[0]["lr"], global_step
+                    "Train/learning_rate",
+                    self.optimizer.param_groups[0]["lr"],
+                    global_step,
                 )
 
                 global_step += 1

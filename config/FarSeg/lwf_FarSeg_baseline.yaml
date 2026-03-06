@@ -1,0 +1,44 @@
+user: di54xen                       
+# Path to the virtual environment to activate on the HPC node.
+# Default: /dss/dsstbyfs02/pn49ci/pn49ci-dss-0026/<user>/.venv
+venv_path: /dss/dsshome1/02/di54xen/projects/oma24-proj/.venv                     
+# Data
+# ---------------------------------------------------------------------------
+csv_name: dev_1000_file.csv         # CSV file with NPZ paths
+# Training hyperparameters
+# ---------------------------------------------------------------------------
+epochs: 32
+batch_size: 12
+num_workers: 16
+prefetch_factor: 8
+experiment_id: baseline_FarSeg  # Unique identifier for this run
+
+# Trainer selection (mutually exclusive; priority: skeleton > aspp > loss > baseline)
+# ---------------------------------------------------------------------------
+use_skeleton_trainer: false         # Skeleton-enhanced trainer
+use_aspp_trainer: false             # ASPP + Residual + Weighted CE + Dice
+use_loss_trainer: false             # Weighted CE + Dice (no ASPP)
+# If all false: baseline standard U-Net with CE loss
+# Loss function
+# ---------------------------------------------------------------------------
+use_class_weights: true
+class_weights: [1.0, 50.0, 5.0]    # [background, linear_veg, patchy_veg]
+use_dice_loss: true
+dice_loss_weight: 0.3
+# Architecture
+# ---------------------------------------------------------------------------
+use_residual: true
+model_name: FarSeg
+backbone: "resnet34"                 # ResNet backbone (currently only for FarSeg)
+use_aspp: true                      # ASPP in bottleneck
+aspp_rates: [3, 6, 9, 12]          # Dilation rates for ASPP
+
+# ---------------------------------------------------------------------------
+# Skeleton trainer options (only used when use_skeleton_trainer: true)
+# ---------------------------------------------------------------------------
+use_distance: false                 # Distance transform as extra input channel
+distance_max: 128                   # Max distance for normalization
+use_input_skeleton: false           # Skeleton as extra input channel
+use_dual_head: false                # Dual-head architecture for skeleton prediction
+skeleton_class: 1                   # Class to extract skeleton from (1 = linear_veg)
+skeleton_loss_weight: 1.0           # Weight for skeleton BCE loss

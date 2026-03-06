@@ -456,7 +456,9 @@ class LWFUNetTrainer:
 
                 # Log learning rate every step
                 self.writer.add_scalar(
-                    "Train/learning_rate", self.optimizer.param_groups[0]["lr"], global_step
+                    "Train/learning_rate",
+                    self.optimizer.param_groups[0]["lr"],
+                    global_step,
                 )
 
                 global_step += 1
