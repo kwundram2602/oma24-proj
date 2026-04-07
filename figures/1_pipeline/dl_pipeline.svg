@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620">
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L8,3 z" fill="#1a1a2e"/>
+  </marker>
+  <marker id="arr_back" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L8,3 z" fill="#1565C0"/>
+  </marker>
+</defs>
+<rect width="1100" height="620" fill="#ffffff"/>
+
+<text x="550" y="36" font-size="20" fill="#1a1a2e" font-weight="700" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Deep Learning Pipeline</text>
+<rect x="290" y="110" width="620" height="400" rx="14" fill="#4A90D908" stroke="#4A90D9" stroke-width="1.5" stroke-dasharray="8,5"/>
+<text x="390" y="124" font-size="10" fill="#4A90D9" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Training Loop  (epoch x batches)</text>
+<rect x="20" y="165" width="140" height="70" rx="10" fill="#4A90D9" stroke="#00000022" stroke-width="1.5"/>
+<text x="90" y="190" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Raw Data</text>
+<text x="90" y="214" font-size="10" fill="#d0e8ff" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">images + labels</text>
+<rect x="200" y="165" width="140" height="70" rx="10" fill="#4A90D9" stroke="#00000022" stroke-width="1.5"/>
+<text x="270" y="190" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Dataset</text>
+<text x="270" y="214" font-size="9.5" fill="#d0e8ff" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">__len__ / __getitem__</text>
+<rect x="380" y="165" width="140" height="70" rx="10" fill="#4A90D9" stroke="#00000022" stroke-width="1.5"/>
+<text x="450" y="190" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">DataLoader</text>
+<text x="450" y="214" font-size="9.5" fill="#d0e8ff" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">batch / shuffle / workers</text>
+<line x1="160" y1="200" x2="198" y2="200" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)" />
+<line x1="340" y1="200" x2="378" y2="200" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)" />
+<text x="490" y="158" font-size="9.5" fill="#4A90D9" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">train / val / test split</text>
+<rect x="310" y="305" width="140" height="70" rx="10" fill="#2ECC71" stroke="#00000022" stroke-width="1.5"/>
+<text x="380" y="330" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Model</text>
+<text x="380" y="354" font-size="10" fill="#c8f5e0" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">CNN / ViT / ...</text>
+<rect x="490" y="305" width="140" height="70" rx="10" fill="#2ECC71" stroke="#00000022" stroke-width="1.5"/>
+<text x="560" y="330" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Predictions</text>
+<text x="560" y="354" font-size="10" fill="#c8f5e0" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">logits / probs</text>
+<rect x="670" y="305" width="140" height="70" rx="10" fill="#1565C0" stroke="#00000022" stroke-width="1.5"/>
+<text x="740" y="330" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Loss</text>
+<text x="740" y="354" font-size="9.5" fill="#c8d8ff" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">CE / Dice / MSE ...</text>
+<rect x="670" y="215" width="140" height="55" rx="8" fill="#EAF0FB" stroke="#4A90D966" stroke-width="1.5"/>
+<text x="740" y="242" font-size="11" fill="#1a1a2e" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Ground Truth</text>
+<line x1="740" y1="273" x2="740" y2="305" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)" />
+<path d="M450,235 L450,270 L380,270 L380,305" fill="none" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)"/>
+<line x1="450" y1="340" x2="488" y2="340" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)" />
+<line x1="630" y1="340" x2="668" y2="340" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)" />
+<rect x="670" y="435" width="140" height="70" rx="10" fill="#1B8A5A" stroke="#00000022" stroke-width="1.5"/>
+<text x="740" y="460" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Optimizer</text>
+<text x="740" y="484" font-size="10" fill="#c8f5e0" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Adam / SGD / ...</text>
+<rect x="490" y="435" width="140" height="70" rx="10" fill="#1B8A5A" stroke="#00000022" stroke-width="1.5"/>
+<text x="560" y="470" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Gradients</text>
+<rect x="310" y="435" width="140" height="70" rx="10" fill="#1B8A5A" stroke="#00000022" stroke-width="1.5"/>
+<text x="380" y="470" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Weight Update</text>
+<line x1="740" y1="375" x2="740" y2="435" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)" />
+<line x1="668" y1="470" x2="630" y2="470" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)"/>
+<line x1="488" y1="470" x2="450" y2="470" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)"/>
+<line x1="380" y1="435" x2="380" y2="375" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="880" y="168" width="170" height="65" rx="10" fill="#5DADE2" stroke="#4A90D988" stroke-width="1.5"/>
+<text x="965" y="186" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Validation</text>
+<text x="965" y="208" font-size="9.5" fill="#d0eeff" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">val loss / metrics</text>
+<text x="965" y="222" font-size="9" fill="#a8d4f5" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">after n train steps</text>
+<rect x="780" y="516" width="170" height="65" rx="10" fill="#5DADE2" stroke="#4A90D988" stroke-width="1.5"/>
+<text x="865" y="538" font-size="13" fill="#ffffff" font-weight="600" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Test</text>
+<text x="865" y="562" font-size="9.5" fill="#d0eeff" font-weight="400" text-anchor="middle" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">precision / recall / F1</text>
+<line x1="810" y1="340" x2="848" y2="340" stroke="#1a1a2e" stroke-width="1.8"/>
+<path d="M848,340 L848,200 L878,200" fill="none" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)"/>
+<path d="M848,340 L848,514" fill="none" stroke="#1a1a2e" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="22" y="412" width="14" height="14" rx="3" fill="#4A90D9"/>
+<text x="44" y="420" font-size="11" fill="#1a1a2e" font-weight="400" text-anchor="start" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Data</text>
+<rect x="22" y="438" width="14" height="14" rx="3" fill="#2ECC71"/>
+<text x="44" y="446" font-size="11" fill="#1a1a2e" font-weight="400" text-anchor="start" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Forward</text>
+<rect x="22" y="464" width="14" height="14" rx="3" fill="#1565C0"/>
+<text x="44" y="472" font-size="11" fill="#1a1a2e" font-weight="400" text-anchor="start" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Loss</text>
+<rect x="22" y="490" width="14" height="14" rx="3" fill="#1B8A5A"/>
+<text x="44" y="498" font-size="11" fill="#1a1a2e" font-weight="400" text-anchor="start" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Backward / Update</text>
+<rect x="22" y="516" width="14" height="14" rx="3" fill="#5DADE2"/>
+<text x="44" y="524" font-size="11" fill="#1a1a2e" font-weight="400" text-anchor="start" font-family="Inter,Segoe UI,sans-serif" dominant-baseline="middle">Eval</text>
+</svg>

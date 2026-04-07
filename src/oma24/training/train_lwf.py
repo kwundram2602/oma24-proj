@@ -1,4 +1,4 @@
-"""Entry point for LWF-DLR U-Net training — called by the SLURM batch script."""
+"""Entry point for LWF-DLR segmentation model training — called by the SLURM batch script."""
 
 import argparse
 import logging
@@ -6,11 +6,11 @@ from pathlib import Path
 
 import yaml
 
-from oma24.training.lwf_unet_aspp_trainer import LWFUNetASPPTrainer
-from oma24.training.lwf_unet_loss_trainer import LWFUNetLossTrainer
-from oma24.training.lwf_unet_skeleton_trainer import LWFUNetSkeletonTrainer
-from oma24.training.lwf_unet_trainer import LWFUNetTrainer
 from oma24.training.lwf_farseg_trainer import LWF_FarSeg_Trainer
+from oma24.training.lwf_deeplab_trainer import LWF_DeepLab_Trainer
+from oma24.training.lwf_swin_upernet_trainer import LWF_SwinUPerNet_Trainer
+from oma24.training.lwf_segformer_trainer import LWF_SegFormer_Trainer
+from oma24.training.lwf_torchgeo_unet_trainer import LWF_TorchGeoUNet_Trainer
 
 logger = logging.getLogger(__name__)
 
@@ -24,69 +24,60 @@ def build_trainer(cfg: dict):
         batch_size=cfg.get("batch_size", 12),
         num_workers=cfg.get("num_workers", 16),
         prefetch_factor=cfg.get("prefetch_factor", 8),
-        experiment_id=cfg.get("experiment_id", "baseline_unet_slurm"),
+        experiment_id=cfg.get("experiment_id", "baseline"),
     )
 
     class_weights = cfg.get("class_weights", [1.0, 50.0, 5.0])
-    model_name = cfg.get("model_name", "UNet")
+    model_name = cfg.get("model_name", "FarSeg")
     use_class_weights = cfg.get("use_class_weights", True)
-    use_dice_loss = cfg.get("use_dice_loss", True)
-    dice_loss_weight = cfg.get("dice_loss_weight", 0.3)
-    use_residual = cfg.get("use_residual", True)
-    use_aspp = cfg.get("use_aspp", True)
-    aspp_rates = tuple(cfg.get("aspp_rates", [3, 6, 9, 12]))
 
-    if model_name == "UNet":
-        if cfg.get("use_skeleton_trainer", False):
-            return LWFUNetSkeletonTrainer(
-                **common,
-                use_class_weights=use_class_weights,
-                class_weights=class_weights,
-                use_dice_loss=use_dice_loss,
-                dice_loss_weight=dice_loss_weight,
-                use_residual=use_residual,
-                use_aspp=use_aspp,
-                aspp_rates=aspp_rates,
-                use_distance=cfg.get("use_distance", False),
-                distance_max=cfg.get("distance_max", 128),
-                use_input_skeleton=cfg.get("use_input_skeleton", False),
-                use_dual_head=cfg.get("use_dual_head", False),
-                skeleton_class=cfg.get("skeleton_class", 1),
-                skeleton_loss_weight=cfg.get("skeleton_loss_weight", 1.0),
-            )
-
-        if cfg.get("use_aspp_trainer", False):
-            return LWFUNetASPPTrainer(
-                **common,
-                use_class_weights=use_class_weights,
-                class_weights=class_weights,
-                use_dice_loss=use_dice_loss,
-                dice_loss_weight=dice_loss_weight,
-                use_residual=use_residual,
-                use_aspp=use_aspp,
-                aspp_rates=aspp_rates,
-            )
-
-        if cfg.get("use_loss_trainer", False):
-            return LWFUNetLossTrainer(
-                **common,
-                class_weights=class_weights,
-                dice_loss_weight=dice_loss_weight,
-            )
-
-        return LWFUNetTrainer(**common)
-
-    elif model_name == "FarSeg":
-        backbone = cfg.get("backbone", "resnet34")
+    if model_name == "FarSeg":
         return LWF_FarSeg_Trainer(
             **common,
-            backbone=backbone,
+            backbone=cfg.get("backbone", "resnet34"),
             use_class_weights=use_class_weights,
-            use_dice_loss=use_dice_loss,
-                dice_loss_weight=dice_loss_weight,
-                use_residual=use_residual,
-                use_aspp=use_aspp,
-                aspp_rates=aspp_rates
+            class_weights=class_weights,
+            test_split=cfg.get("test_split", 0.0),
+        )
+
+    elif model_name == "DeepLabV3":
+        return LWF_DeepLab_Trainer(
+            **common,
+            backbone=cfg.get("backbone", "resnet50"),
+            backbone_weights=cfg.get("backbone_weights", None),
+            use_class_weights=use_class_weights,
+            class_weights=class_weights,
+            test_split=cfg.get("test_split", 0.0),
+        )
+
+    elif model_name == "SwinUPerNet":
+        return LWF_SwinUPerNet_Trainer(
+            **common,
+            backbone=cfg.get("backbone", "swin_tiny"),
+            encoder_weights=cfg.get("encoder_weights", None),
+            img_size=cfg.get("img_size", 1024),
+            use_class_weights=use_class_weights,
+            class_weights=class_weights,
+            test_split=cfg.get("test_split", 0.0),
+        )
+
+    elif model_name == "SegFormer":
+        return LWF_SegFormer_Trainer(
+            **common,
+            backbone=cfg.get("backbone", "mit_b2"),
+            encoder_weights=cfg.get("encoder_weights", "imagenet"),
+            use_class_weights=use_class_weights,
+            class_weights=class_weights,
+            test_split=cfg.get("test_split", 0.0),
+        )
+
+    elif model_name == "TorchGeoUNet":
+        return LWF_TorchGeoUNet_Trainer(
+            **common,
+            pretrained_weights=cfg.get("pretrained_weights", "OAM_RGB_RESNET34_TCD"),
+            use_class_weights=use_class_weights,
+            class_weights=class_weights,
+            test_split=cfg.get("test_split", 0.0),
         )
 
     else:
@@ -95,7 +86,7 @@ def build_trainer(cfg: dict):
 
 def main():  # noqa: D103
     parser = argparse.ArgumentParser(
-        description="Run LWF-DLR U-Net training from a YAML config"
+        description="Run LWF-DLR segmentation model training from a YAML config"
     )
     parser.add_argument("--config", type=Path, help="Path to the YAML config file")
     args = parser.parse_args()
@@ -110,6 +101,7 @@ def main():  # noqa: D103
     )
 
     trainer = build_trainer(cfg)
+    logger.info("Config (%s):\n%s", args.config, yaml.dump(cfg, default_flow_style=False, allow_unicode=True).strip())
     logger.info("Starting training: %s", cfg.get("experiment_id"))
     trainer()
 

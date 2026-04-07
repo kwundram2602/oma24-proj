@@ -1,0 +1,28 @@
+user: di54xen
+venv_path: /dss/dsshome1/02/di54xen/projects/oma24-proj/.venv
+
+# Data
+# ---------------------------------------------------------------------------
+csv_name: dev_1000_file.csv         # CSV file with NPZ paths
+test_split: 0.15                    # Fraction for held-out test set (0.0 = no test eval)
+
+# Training hyperparameters
+# ---------------------------------------------------------------------------
+epochs: 80
+batch_size: 12
+num_workers: 14
+prefetch_factor: 2
+
+# Unique identifier for this run --> TensorBoard id
+experiment_id: baseline_TorchGeoUNet_scratch
+
+# Model
+# ---------------------------------------------------------------------------
+model_name: TorchGeoUNet
+# null = random init with ResNet34 encoder (no pretrained weights)
+pretrained_weights: null
+
+# Loss
+# ---------------------------------------------------------------------------
+use_class_weights: true
+class_weights: [1.0, 50.0, 5.0]    # [background, linear_veg, patchy_veg]

@@ -5,7 +5,10 @@ build/
 dist/
 wheels/
 *.egg-info
-
+info.md
 # Virtual environments
 .venv
 uv.lock
+scripts
+*.pth
+*.pt

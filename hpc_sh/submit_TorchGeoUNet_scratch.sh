@@ -1,16 +1,16 @@
 #!/bin/bash
 
-#SBATCH --job-name=lwf_FarSeg_1
+#SBATCH --job-name=lwf_TorchGeoUNet_scratch
 #SBATCH --exclude=hpdar01c03s04
 #SBATCH --account=pn39sa-c
 #SBATCH --partition=hpda2_compute_gpu
-#SBATCH --time=03:00:00
+#SBATCH --time=01:30:00
 #SBATCH --nodes=1
 #SBATCH --export=NONE
 #SBATCH --get-user-env
 #SBATCH --gpus-per-node=1
-#SBATCH --cpus-per-task=18
-#SBATCH --mem=256GB
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=240GB
 #SBATCH --output=/dss/dsstbyfs02/pn49ci/pn49ci-dss-0026/di54xen/experiments/LWF-DLR/slurm_logs/%j_out_log.out
 #SBATCH --error=/dss/dsstbyfs02/pn49ci/pn49ci-dss-0026/di54xen/experiments/LWF-DLR/slurm_logs/%j_err_log.err
 # optional:
@@ -24,7 +24,8 @@ module load uv
 source /dss/dsshome1/02/di54xen/projects/oma24-proj/.venv/bin/activate
 
 # Run training
-uv run train_lwf --config /dss/dsshome1/02/di54xen/projects/oma24-proj/config/lwf_template.yaml
+export PYTORCH_ALLOC_CONF=expandable_segments:True
+uv run train_lwf --config /dss/dsshome1/02/di54xen/projects/oma24-proj/config/TorchGeoUNet/lwf_TorchGeoUNet_scratch.yaml
 
 # Organize logs into dated subdirectories
 LOG_BASE="/dss/dsstbyfs02/pn49ci/pn49ci-dss-0026/di54xen/experiments/LWF-DLR/slurm_logs"
